@@ -23,7 +23,8 @@ end
 
 [
   'Scrapy', 'scrapy-user-agents', 'deathbycaptcha', 'elasticsearch',
-  'scrapy-redis', 'scrapy_proxy_pool', 'python-dotenv'
+  'scrapy-redis', 'scrapy_proxy_pool', 'python-dotenv', 'aliexpress_page_parser',
+  'scrapy-mongodb'
 ].each do |package|
   describe command("pip show #{package}") do
     its('exit_status') { should eq 0 }

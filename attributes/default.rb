@@ -5,8 +5,8 @@
 # @Email:   qwang16@olivetuniversity.edu
 
 default['scrapyd']['packages'] = [
-  'Scrapy', 'scrapy-user-agents', 'deathbycaptcha', 'elasticsearch', 'scrapy-redis',
-  'scrapy_proxy_pool', 'python-dotenv'
+  'Scrapy', 'scrapy-user-agents', 'deathbycaptcha', '"elasticsearch<7"', 'scrapy-redis',
+  'scrapy_proxy_pool', 'python-dotenv', 'aliexpress_page_parser', 'scrapy-mongodb'
 ]
 
 default['scrapyd']['user'] = 'scrapy'
