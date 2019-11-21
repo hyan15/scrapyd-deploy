@@ -15,6 +15,8 @@ writable_dirs = [eggs_dir, dbs_dir, items_dir, logs_dir, run_dir]
 run_user = 'scrapy'
 run_group = 'scrapy'
 conf_dir = '/etc/scrapyd'
+dependencies_dir = File.join(conf_dir, 'dependencies')
+requirements_path = File.join(dependencies_dir, 'requirements.txt')
 scrapyd_config = File.join(conf_dir, 'scrapyd.conf')
 
 writable_dirs.each do |writable_dir|
@@ -33,6 +35,21 @@ describe directory(conf_dir) do
   its('mode') { should eq 493 }
 end
 
+describe directory(dependencies_dir) do
+  it { should exist }
+  its('owner') { should eq 'root' }
+  its('group') { should eq 'root' }
+  its('mode') { should eq 493 }
+end
+
+describe file(requirements_path) do
+  it { should exist }
+  its('owner') { should eq 'root' }
+  its('group') { should eq 'root' }
+  its('mode') { should eq 420 }
+  its('content') { should match 'Scrapy' }
+end
+
 describe file(scrapyd_config) do
   it { should exist }
   its('owner') { should eq 'root' }
@@ -48,6 +65,13 @@ describe ini(scrapyd_config) do
   its('scrapyd.dbs_dir') { should eq dbs_dir }
   its('scrapyd.bind_address') { should eq '0.0.0.0' }
   its('scrapyd.http_port') { should eq '6800' }
+end
+
+describe crontab('root').commands(
+  "pip install -U -r #{requirements_path}") do
+  its('minutes') { should cmp '11' }
+  its('hours') { should cmp '1' }
+  its('entries.length') { should cmp '1' }
 end
 
 describe systemd_service('scrapyd.service') do

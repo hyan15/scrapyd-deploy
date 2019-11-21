@@ -13,6 +13,8 @@ writable_dirs = [
 run_user = 'scrapy'
 run_group = 'scrapy'
 conf_dir = '/etc/scrapyd'
+dependencies_dir = File.join(conf_dir, 'dependencies')
+requirements_path = File.join(dependencies_dir, 'requirements.txt')
 scrapyd_config = File.join(conf_dir, 'scrapyd.conf')
 
 describe 'scrapyd-deploy::default' do
@@ -40,9 +42,25 @@ describe 'scrapyd-deploy::default' do
         user: 'root', group: 'root', mode: '0755')
     end
 
+    it "should create dependencies directory #{dependencies_dir}" do
+      expect(chef_run).to create_directory(dependencies_dir).with(
+        user: 'root', group: 'root', mode: '0755')
+    end
+
     it "should create configuration #{scrapyd_config}" do
       expect(chef_run).to create_template(scrapyd_config).with(
         user: 'root', group: 'root', mode: '0644')
+    end
+
+    it "should create requirements file #{requirements_path}" do
+      expect(chef_run).to create_template(requirements_path).with(
+        user: 'root', group: 'root', mode: '0644')
+    end
+
+    it "creates cron 'Dependencies Upgrade'" do
+      expect(chef_run).to create_cron('Dependencies Upgrade').with(
+        minute: '11', hour: '1', user: 'root',
+        command: "pip install -U -r #{requirements_path}")
     end
 
     it "should create systemd service scrapyd.service" do
