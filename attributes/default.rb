@@ -6,7 +6,7 @@
 
 default['scrapyd']['packages'] = [
   'Scrapy', 'scrapy-user-agents', 'deathbycaptcha', '"elasticsearch<7"', 'scrapy-redis',
-  'scrapy_proxy_pool', 'python-dotenv', 'aliexpress_page_parser', 'scrapy-mongodb'
+  'scrapy_proxy_pool', 'python-dotenv', 'aliexpress_page_parser', 'scrapy-mongodb', 'sentry-sdk'
 ]
 
 default['scrapyd']['user'] = 'scrapy'
