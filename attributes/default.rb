@@ -4,8 +4,10 @@
 # @Author: Neal Wong
 # @Email:   qwang16@olivetuniversity.edu
 
+default['scrapyd']['packages_url'] = 'https://devpi.olivesmall.com'
+default['scrapyd']['packages_index'] = '/ibprnd/prod'
 default['scrapyd']['packages'] = [
-  'Scrapy', 'scrapy-user-agents', 'deathbycaptcha', '"elasticsearch<7"', 'scrapy-redis',
+  'scrapyd', 'Scrapy', 'scrapy-user-agents', 'deathbycaptcha', '"elasticsearch<7"', 'scrapy-redis',
   'scrapy_proxy_pool', 'python-dotenv', 'aliexpress_page_parser', 'scrapy-mongodb', 'sentry-sdk'
 ]
 
@@ -13,6 +15,8 @@ default['scrapyd']['user'] = 'scrapy'
 default['scrapyd']['group'] = 'scrapy'
 default['scrapyd']['bind_address'] = '0.0.0.0'
 default['scrapyd']['http_port'] = '6800'
+default['scrapyd']['http_user'] = 'ibprnd'
+default['scrapyd']['http_password'] = 'ibportrnd153'
 default['scrapyd']['max_proc'] = 0
 default['scrapyd']['max_proc_per_cpu'] = 4
 default['scrapyd']['debug'] = 'off'

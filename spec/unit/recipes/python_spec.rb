@@ -16,25 +16,20 @@ describe 'scrapyd-deploy::python' do
       expect { chef_run }.to_not raise_error
     end
 
-    it 'should update apt' do
-      expect(chef_run).to update_apt_update('update')
+    it 'should install system pyenv' do
+      expect(chef_run).to install_pyenv_system_install('system')
     end
 
-    it 'should install package python-pip' do
-      expect(chef_run).to install_package('python-pip')
+    it 'should install system python 3.6.5' do
+      expect(chef_run).to install_pyenv_python('3.6.5')
     end
 
-    it 'should upgrade pip' do
-      expect(chef_run).to run_execute("pip install -U pip").with(user: 'root')
+    it 'should create pyenv global 3.6.5' do
+      expect(chef_run).to create_pyenv_global('3.6.5')
     end
 
-    it 'should install scrapyd' do
-      expect(chef_run).to run_execute("pip install scrapyd").with(user: 'root')
-    end
-
-    it 'should install pip dependencies' do
-      expect(chef_run).to run_execute(
-        "pip install #{node.default['scrapyd']['packages'].join(' ')}")
+    it 'should run rehash' do
+      expect(chef_run).to run_pyenv_rehash('rehash')
     end
   end
 end

@@ -10,6 +10,8 @@ finished_to_keep = <%= node['scrapyd']['finished_to_keep'] %>
 poll_interval = <%= node['scrapyd']['poll_interval'] %>
 bind_address = <%= node['scrapyd']['bind_address'] %>
 http_port   = <%= node['scrapyd']['http_port'] %>
+username    = <%= node['scrapyd']['http_user'] %>
+password    = <%= node['scrapyd']['http_password'] %>
 debug       = <%= node['scrapyd']['debug'] %>
 runner      = <%= node['scrapyd']['runner'] %>
 application = <%= node['scrapyd']['application'] %>

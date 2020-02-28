@@ -5,28 +5,19 @@
 # The Inspec reference, with examples and extensive documentation, can be
 # found at http://inspec.io/docs/reference/resources/
 
-describe command('python -V') do
-  its('exit_status') { should eq 0 }
+global_python = '3.6.5'
+
+describe bash('source /etc/profile.d/pyenv.sh && pyenv global') do
+  its('exit_status') { should eq(0) }
+  its('stdout') { should match(global_python) }
+  its('stdout') { should_not match('system') }
 end
 
-describe command('pip -V') do
+describe bash('source /etc/profile.d/pyenv.sh && python -V') do
   its('exit_status') { should eq 0 }
+  its('stdout') { should match(global_python) }
 end
 
-describe command('scrapyd --version') do
+describe bash('source /etc/profile.d/pyenv.sh && pip -V') do
   its('exit_status') { should eq 0 }
-end
-
-describe command('scrapy --version') do
-  its('exit_status') { should eq 0 }
-end
-
-[
-  'Scrapy', 'scrapy-user-agents', 'deathbycaptcha', 'elasticsearch',
-  'scrapy-redis', 'scrapy_proxy_pool', 'python-dotenv', 'aliexpress_page_parser',
-  'scrapy-mongodb'
-].each do |package|
-  describe command("pip show #{package}") do
-    its('exit_status') { should eq 0 }
-  end
 end

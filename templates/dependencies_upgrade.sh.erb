@@ -1,0 +1,7 @@
+#!/bin/bash
+
+/usr/local/pyenv/shims/devpi use <%= node['scrapyd']['packages_url'] %>
+/usr/local/pyenv/shims/devpi use <%= node['scrapyd']['packages_index'] %>
+<% node['scrapyd']['packages'].each do |package_name| %>
+/usr/local/pyenv/shims/devpi install <%= package_name %>
+<% end %>

@@ -4,17 +4,7 @@
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
-apt_update 'update' do
-  action :update
-end
-
-package 'python-pip'
-execute 'pip install -U pip' do
-  user 'root'
-end
-execute 'pip install scrapyd' do
-  user 'root'
-end
-execute "pip install #{node['scrapyd']['packages'].join(' ')}" do
-  user 'root'
-end
+pyenv_system_install 'system'
+pyenv_python '3.6.5'
+pyenv_global '3.6.5'
+pyenv_rehash 'rehash'
