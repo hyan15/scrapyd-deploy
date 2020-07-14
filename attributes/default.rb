@@ -7,8 +7,9 @@
 default['scrapyd']['packages_url'] = 'https://devpi.olivesmall.com'
 default['scrapyd']['packages_index'] = '/ibprnd/prod'
 default['scrapyd']['packages'] = [
-  'scrapyd', 'Scrapy', 'scrapy-user-agents', 'deathbycaptcha', '"elasticsearch<7"', 'scrapy-redis',
-  'scrapy_proxy_pool', 'python-dotenv', 'aliexpress_page_parser', 'scrapy-mongodb', 'sentry-sdk'
+  'scrapyd', 'scrapy-user-agents', 'scrapy-redis', 'scrapy-splash', 'scrapy-proxy-pool',
+  'scrapy-mongodb', '"Scrapy<2"', 'deathbycaptcha', '"elasticsearch<7"', 'amazon-page-parser',
+  'python-dotenv', 'sentry-sdk'
 ]
 
 default['scrapyd']['user'] = 'scrapy'

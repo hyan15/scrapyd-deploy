@@ -13,6 +13,7 @@ Tested on 13.6.4, but version newer than 12.1 should work just fine. File an [is
 The following platforms have been tested with this cookbook:
 
 * ubuntu (16.04) 
+* ubuntu (18.04) 
 
 ## Recipes
 
@@ -26,7 +27,13 @@ Install python, upgrade pip, install scrapyd and setup scrapyd systemd service.
 
 Pip packages that scrapy projects depend on.
 
-The default is `['Scrapy', 'scrapy-user-agents', 'deathbycaptcha', 'elasticsearch', 'scrapy-redis', 'scrapy_proxy_pool', 'python-dotenv']`
+The default is `
+[
+  'scrapyd', 'scrapy-user-agents', 'scrapy-redis', 'scrapy-splash', 'scrapy-proxy-pool',
+  'scrapy-mongodb', '"Scrapy<2"', 'deathbycaptcha', '"elasticsearch<7"', 'amazon-page-parser',
+  'python-dotenv', 'sentry-sdk'
+]
+`
 
 ### scrapyd.user
 
@@ -120,5 +127,6 @@ The default is `"scrapyd.website.Root"`
 
 ## Testing
 
-chef exec rspec
-kitchen test
+`chef exec rspec`
+
+`kitchen test`
